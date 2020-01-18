@@ -1,11 +1,10 @@
 package cn.tedu.gmall.user.controller;
 
-import cn.tedu.gmall.user.bean.UmsMember;
-import cn.tedu.gmall.user.bean.UmsMemberReceiveAddress;
-import cn.tedu.gmall.user.service.UserService;
+import cn.tedu.gmall.service.UserService;
+import cn.tedu.gmall.bean.UmsMember;
+import cn.tedu.gmall.bean.UmsMemberReceiveAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

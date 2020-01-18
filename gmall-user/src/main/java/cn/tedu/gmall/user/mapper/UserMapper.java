@@ -1,6 +1,6 @@
 package cn.tedu.gmall.user.mapper;
 
-import cn.tedu.gmall.user.bean.UmsMember;
+import cn.tedu.gmall.bean.UmsMember;
 import tk.mybatis.mapper.common.Mapper;
 
 import javax.annotation.Resource;

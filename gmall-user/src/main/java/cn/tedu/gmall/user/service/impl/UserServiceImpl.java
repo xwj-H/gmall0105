@@ -1,13 +1,12 @@
 package cn.tedu.gmall.user.service.impl;
 
-import cn.tedu.gmall.user.bean.UmsMember;
-import cn.tedu.gmall.user.bean.UmsMemberReceiveAddress;
+import cn.tedu.gmall.service.UserService;
+import cn.tedu.gmall.bean.UmsMember;
+import cn.tedu.gmall.bean.UmsMemberReceiveAddress;
 import cn.tedu.gmall.user.mapper.UmsMemberReceiveAddressMapper;
 import cn.tedu.gmall.user.mapper.UserMapper;
-import cn.tedu.gmall.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         //封装参数对象
         UmsMemberReceiveAddress umsMemberReceiveAddress = new UmsMemberReceiveAddress();
-        umsMemberReceiveAddress.setMember_id(memberId);
+        umsMemberReceiveAddress.setMemberId(memberId);
         List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.select(umsMemberReceiveAddress);
 
         return umsMemberReceiveAddresses;
