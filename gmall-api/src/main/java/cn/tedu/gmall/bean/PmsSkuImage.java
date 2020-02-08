@@ -20,7 +20,7 @@ public class PmsSkuImage implements Serializable {
     @Column
     String imgUrl;
     @Column
-    String productImgId;
+    String spuImgId;
     @Column
     String isDefault;
 
@@ -56,19 +56,19 @@ public class PmsSkuImage implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public String getProductImgId() {
-        return productImgId;
-    }
-
-    public void setProductImgId(String productImgId) {
-        this.productImgId = productImgId;
-    }
-
     public String getIsDefault() {
         return isDefault;
     }
 
     public void setIsDefault(String isDefault) {
         this.isDefault = isDefault;
+    }
+
+    public String getSpuImgId() {
+        return spuImgId;
+    }
+
+    public void setSpuImgId(String spuImgId) {
+        this.spuImgId = spuImgId;
     }
 }

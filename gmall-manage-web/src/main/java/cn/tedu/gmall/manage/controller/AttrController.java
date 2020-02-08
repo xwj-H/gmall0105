@@ -1,6 +1,8 @@
 package cn.tedu.gmall.manage.controller;
 
 import cn.tedu.gmall.bean.PmsBaseAttrInfo;
+import cn.tedu.gmall.bean.PmsBaseAttrValue;
+import cn.tedu.gmall.bean.PmsBaseSaleAttr;
 import cn.tedu.gmall.service.AttrService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,22 @@ public class AttrController {
     @RequestMapping("saveAttrInfo")
     @ResponseBody
     public String saveAttrInfo(@RequestBody PmsBaseAttrInfo pmsBaseAttrInfo) {
-
-        return "success";
+            String success=attrService.saveAttrInfo(pmsBaseAttrInfo);
+        return success;
     }
+    @RequestMapping("getAttrValueList")
+    @ResponseBody
+    public List<PmsBaseAttrValue> getAttrValueList(String attrId) {
+        List<PmsBaseAttrValue> pmsBaseAttrValueList = attrService.getAttrValueList(attrId);
+
+        return pmsBaseAttrValueList;
+    }
+    @RequestMapping("baseSaleAttrList")
+    @ResponseBody
+    public List<PmsBaseSaleAttr> baseSaleAttrList() {
+        List<PmsBaseSaleAttr> pmsBaseSaleAttrs = attrService.baseSaleAttrList();
+        return pmsBaseSaleAttrs;
+    }
+    //spuSaleAttrList
+      //      spuImageList
 }
