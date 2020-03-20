@@ -2,8 +2,6 @@ package cn.tedu.gmall.search.service.impl;
 
 import cn.tedu.gmall.bean.PmsSearchParam;
 import cn.tedu.gmall.bean.PmsSearchSkuInfo;
-import cn.tedu.gmall.bean.PmsSkuAttrValue;
-import cn.tedu.gmall.bean.PmsSkuInfo;
 import cn.tedu.gmall.service.SearchService;
 import com.alibaba.dubbo.config.annotation.Service;
 import io.searchbox.client.JestClient;
@@ -48,7 +46,7 @@ public class SrarchServiceImpl implements SearchService {
         for (SearchResult.Hit<PmsSearchSkuInfo, Void> hit : hits) {
             PmsSearchSkuInfo source = hit.source;
             Map<String, List<String>> highlight = hit.highlight;
-            if (highlight!=null) {
+            if (highlight != null) {
                 String skuName = highlight.get("skuName").get(0);
                 source.setSkuName(skuName);
             }
@@ -59,7 +57,7 @@ public class SrarchServiceImpl implements SearchService {
     }
 
     private String getSearchDsl(PmsSearchParam pmsSearchParam) {
-        List<PmsSkuAttrValue> skuAttrValues = pmsSearchParam.getSkuAttrValues();
+        String[] valueId = pmsSearchParam.getValueId();
         String keyword = pmsSearchParam.getKeyword();
         String catalog3Id = pmsSearchParam.getCatalog3Id();
 
@@ -70,13 +68,13 @@ public class SrarchServiceImpl implements SearchService {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         //filter
         if (StringUtils.isNotBlank(catalog3Id)) {
-            TermQueryBuilder termQueryBuilder = new TermQueryBuilder("catalog3Id",catalog3Id);
+            TermQueryBuilder termQueryBuilder = new TermQueryBuilder("catalog3Id", catalog3Id);
             boolQueryBuilder.filter(termQueryBuilder);
         }
 
-        if (skuAttrValues != null) {
-            for (PmsSkuAttrValue skuAttrValue : skuAttrValues) {
-                TermQueryBuilder termQueryBuilder = new TermQueryBuilder("skuAttrValueList.valueId", skuAttrValue.getValueId());
+        if (valueId != null) {
+            for (String skuAttrValue : valueId) {
+                TermQueryBuilder termQueryBuilder = new TermQueryBuilder("skuAttrValueList.valueId", skuAttrValue);
                 boolQueryBuilder.filter(termQueryBuilder);
 
             }

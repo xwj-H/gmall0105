@@ -17,17 +17,16 @@ public class UserController {
 
     @RequestMapping("getReceiveAddressByMemberId")
     @ResponseBody
-    public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId( String memberId) {
+    public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(String memberId) {
         List<UmsMemberReceiveAddress> umsMemberReceiveAddress = userService.getReceiveAddressByMemberId(memberId);
         return umsMemberReceiveAddress;
     }
 
 
-
     @RequestMapping("getAllUser")
     @ResponseBody
     public List<UmsMember> getAllUser() {
-       List<UmsMember> umsMembers=userService.getAllUser();
+        List<UmsMember> umsMembers = userService.getAllUser();
         return umsMembers;
     }
 

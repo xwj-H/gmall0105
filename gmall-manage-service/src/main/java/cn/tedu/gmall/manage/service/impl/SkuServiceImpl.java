@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class SkuServiceImpl implements SkuService {
     }
 
     @Override
-    public PmsSkuInfo getSkuById(String skuId,String ip) {
+    public PmsSkuInfo getSkuById(String skuId, String ip) {
         PmsSkuInfo pmsSkuInfo = null;
         //链接缓存
         Jedis jedis = redisUtil.getJedis();
@@ -59,7 +60,7 @@ public class SkuServiceImpl implements SkuService {
             //如果缓存中没有，查询MySQL
             //设置分布式锁
             String token = UUID.randomUUID().toString();
-            String OK = jedis.set("sku:" + skuId + ":lock", token, "nx", "px", 10*1000);
+            String OK = jedis.set("sku:" + skuId + ":lock", token, "nx", "px", 10 * 1000);
             if (StringUtils.isNotBlank(OK) && OK.equals("OK")) {
                 //设置成功，有权在10秒的过期时间内访问数据库
                 pmsSkuInfo = getSkuByIdFromDb(skuId);
@@ -67,7 +68,7 @@ public class SkuServiceImpl implements SkuService {
                 if (pmsSkuInfo != null) {
                     jedis.set("sku:" + skuId + ":info", JSON.toJSONString(pmsSkuInfo));
                 } else {
-                    //数据库中不存在改sku
+                    //数据库中不存在该sku
                     //为了防止缓存将，null或空字符串值设置给redis
                     jedis.setex("sku:" + skuId + ":info", 60 * 3, JSON.toJSONString(""));
                 }
@@ -85,7 +86,7 @@ public class SkuServiceImpl implements SkuService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return getSkuById(skuId,ip);
+                return getSkuById(skuId, ip);
             }
         }
 
@@ -111,6 +112,19 @@ public class SkuServiceImpl implements SkuService {
             pmsSkuInfo.setSkuAttrValueList(pmsSkuAttrValues);
         }
         return pmsSkuInfos;
+    }
+
+    @Override
+    public boolean checkPrice(String productId, BigDecimal productPrice) {
+        boolean b = false;
+        PmsSkuInfo pmsSkuInfo = new PmsSkuInfo();
+        pmsSkuInfo.setId(productId);
+        PmsSkuInfo pmsSkuInfo1 = pmsSkuInfoMapper.selectOne(pmsSkuInfo);
+        BigDecimal price = pmsSkuInfo1.getPrice();
+        if (price.compareTo(productPrice) == 0) {
+            b = true;
+        }
+        return b;
     }
 
 

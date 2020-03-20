@@ -28,12 +28,14 @@ public class UserServiceImpl implements UserService {
     public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(String memberId) {
         /*Example e = new Example(UmsMemberReceiveAddress.class);
         e.createCriteria().andEqualTo("memberId", memberId); // 创建查询规则*/
-//        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.selectByExample(umsMemberReceiveAddress);//外键查询
+//        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.selectByExample
+//        (umsMemberReceiveAddress);//外键查询
 
         //封装参数对象
         UmsMemberReceiveAddress umsMemberReceiveAddress = new UmsMemberReceiveAddress();
         umsMemberReceiveAddress.setMemberId(memberId);
-        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.select(umsMemberReceiveAddress);
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses =
+                umsMemberReceiveAddressMapper.select(umsMemberReceiveAddress);
 
         return umsMemberReceiveAddresses;
     }

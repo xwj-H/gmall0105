@@ -14,10 +14,10 @@ public class PaymentInfo implements Serializable {
 
     @Column
     @Id
-    private String  id;
+    private String id;
 
     @Column
-    private String outTradeNo;
+    private String orderSn;
 
     @Column
     private String orderId;
@@ -51,12 +51,12 @@ public class PaymentInfo implements Serializable {
         this.id = id;
     }
 
-    public String getOutTradeNo() {
-        return outTradeNo;
+    public String getOrderSn() {
+        return orderSn;
     }
 
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
     }
 
     public String getOrderId() {

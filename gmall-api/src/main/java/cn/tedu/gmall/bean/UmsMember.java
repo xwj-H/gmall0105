@@ -1,5 +1,7 @@
 package cn.tedu.gmall.bean;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 public class UmsMember implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String memberLevelId;
     private String username;
@@ -26,6 +29,34 @@ public class UmsMember implements Serializable {
     private int growth;
     private int luckeyCount;
     private int historyIntegration;
+
+    private Long sourceUid;
+    private String accessToken;
+    private String accessCode;
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public Long getSourceUid() {
+        return sourceUid;
+    }
+
+    public void setSourceUid(Long sourceUid) {
+        this.sourceUid = sourceUid;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public String getId() {
         return id;
@@ -178,4 +209,7 @@ public class UmsMember implements Serializable {
     public void setHistoryIntegration(int historyIntegration) {
         this.historyIntegration = historyIntegration;
     }
+
+
 }
+

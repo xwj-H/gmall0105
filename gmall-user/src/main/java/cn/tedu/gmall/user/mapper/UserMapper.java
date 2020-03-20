@@ -5,6 +5,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 import javax.annotation.Resource;
 import java.util.List;
+
 @Resource
 public interface UserMapper extends Mapper<UmsMember> {
     List<UmsMember> selectAllUser();

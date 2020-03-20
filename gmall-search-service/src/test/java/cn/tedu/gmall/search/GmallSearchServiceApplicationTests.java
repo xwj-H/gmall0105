@@ -39,12 +39,12 @@ class GmallSearchServiceApplicationTests {
         //jest的dsl工具
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
-                //bool
+        //bool
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-                //filter
+        //filter
         TermQueryBuilder termQueryBuilder = new TermQueryBuilder("skuAttrValueList.valueId", "");
         boolQueryBuilder.filter(termQueryBuilder);
-                //must
+        //must
         MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("", "");
         boolQueryBuilder.must(matchQueryBuilder);
 
@@ -70,6 +70,7 @@ class GmallSearchServiceApplicationTests {
             pmsSearchSkuInfos.add(source);
         }
     }
+
     public void put() throws IOException {
         //查询MySQL数据
         List<PmsSkuInfo> pmsSkuInfos = new ArrayList<>();
@@ -86,7 +87,8 @@ class GmallSearchServiceApplicationTests {
         //导入es
         for (PmsSearchSkuInfo pmsSearchSkuInfo : pmsSearchSkuInfos) {
             //                                               数据库名                表名                        Id
-            Index put = new Index.Builder(pmsSearchSkuInfo).index("gmall0105").type("PmsSkuInfo").id(pmsSearchSkuInfo.getId()).build();
+            Index put =
+                    new Index.Builder(pmsSearchSkuInfo).index("gmall0105").type("PmsSkuInfo").id(pmsSearchSkuInfo.getId()).build();
             jestClient.execute(put);
         }
     }

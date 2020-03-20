@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tedu.gmall.manage.mapper.PmsSkuInfoMapper">
     <select id="selectSkuSaleAttrValueListBySpu" resultType="selectSkuSaleAttrValueListBySpuMap">
-        SELECT
-            si.*,ssav.*,si.id as si_id ,ssav.id as ssav_id
-        FROM
-            pms_sku_info si,
-            pms_sku_sale_attr_value ssav
-        WHERE
-            si.product_id = #{productId}
+        SELECT si.*,
+               ssav.*,
+               si.id   as si_id,
+               ssav.id as ssav_id
+        FROM pms_sku_info si,
+             pms_sku_sale_attr_value ssav
+        WHERE si.product_id = #{productId}
           AND si.id = ssav.sku_id
 
     </select>
